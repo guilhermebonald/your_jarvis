@@ -46,6 +46,7 @@ def chat_ai(chat):
         return json["generated_text"]
     else:
         print(f"Falha na requisição: {response.status_code}")
+        return ''
 
 
 # ? Text to Audio
@@ -63,5 +64,5 @@ def main():
     text_to_audio(text)
 
 
-while True:
-    main()
+# while True:
+#     main()
