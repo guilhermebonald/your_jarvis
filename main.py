@@ -21,11 +21,11 @@ def audio_to_text():
             message = r.recognize_google(audio, language="pt-BR")
 
             if palavra_chave.lower() in message:
-                    print("\nPalavra-Chave detectada... Ouvindo!\n")
-                    message = r.recognize_google(audio, language="pt-BR")
-                    split_message = message.split()
-                    message = ' '.join(split_message[1:])
-                    return message
+                print("\nPalavra-Chave detectada... Ouvindo!\n")
+                message = r.recognize_google(audio, language="pt-BR")
+                split_message = message.split()
+                message = " ".join(split_message[1:])
+                return message
             else:
                 print("\nPalavra-Chave não detectada.!\n")
         except sr.UnknownValueError:
