@@ -64,5 +64,5 @@ def main():
     text_to_audio(text)
 
 
-# while True:
-#     main()
+while True:
+    main()
