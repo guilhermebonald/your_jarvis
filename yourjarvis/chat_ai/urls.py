@@ -3,5 +3,5 @@ from . import views
 
 # * Created for URL control
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.chat_ai, name='chat_ai'),
 ]

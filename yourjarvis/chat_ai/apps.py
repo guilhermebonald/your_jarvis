@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class YourjarvisappConfig(AppConfig):
+class ChatAiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'yourjarvisapp'
+    name = 'chat_ai'
