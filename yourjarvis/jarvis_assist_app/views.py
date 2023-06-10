@@ -1,12 +1,13 @@
-import speech_recognition as sr
+from django.http import HttpResponse
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from .service import get_chat, audio_to_text
 from .forms import UploadFile
+from django.views.decorators.csrf import csrf_exempt
+import speech_recognition as sr
 
 
-# Create your views here.
 @csrf_exempt
-def audio_to_text(request):
+def jarvis_assist(request):
     if request.method == "POST":
         # Recognizer Instance
         r = sr.Recognizer()
@@ -30,3 +31,8 @@ def audio_to_text(request):
             return JsonResponse(form.errors)
 
     return JsonResponse({"error": "Requisição Inválida"})
+
+
+def chat_ai(request):
+    get_message = get_chat("Olá Boa Noite!")
+    return HttpResponse(get_message)

@@ -3,5 +3,5 @@ from . import views
 
 # * Created for URL control
 urlpatterns = [
-    path("", views.chat_ai, name='chat_ai'),
+    path("", views.jarvis_assist, name='jarvis_assist'),
 ]

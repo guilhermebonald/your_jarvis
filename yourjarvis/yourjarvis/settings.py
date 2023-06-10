@@ -26,9 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "audio_to_text",
-    "chat_ai",
-    "text_to_audio",
+    "jarvis_assist_app",
 ]
 
 MIDDLEWARE = [
