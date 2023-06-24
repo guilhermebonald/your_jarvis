@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 import speech_recognition as sr
 import json
 import pyttsx3
+from tempfile import NamedTemporaryFile
+import time
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 path = os.path.join(dir_path, "static", ".env")
@@ -41,6 +43,17 @@ def get_ai(message):
 
 # * Text to Audio
 def text_to_audio(text):
-    engine = pyttsx3.init()
-    engine.save_to_file(text, 'jarvis.mp3')
-    engine.runAndWait()
+    with NamedTemporaryFile(prefix= "Y_Jarvis-", delete=True, mode='wb') as file:
+        # pyttsx3 convert text to audio
+        engine = pyttsx3.init()
+        temp_file_name = file.name
+        engine.save_to_file(text, temp_file_name + '.mp3')
+        engine.runAndWait()
+
+        # ! - tratar arquivos temporarios que não estão sendo excluidos por causa
+        # ! - de estar em processo aberto.
+        
+        # ? - Mudar o diretorio do arquivo temporario para dentro do projeto.
+        # ? - Após isso, trabalhor com arquivo direto da View.
+    
+text_to_audio("Olá! Boa Tarde.")

@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from .service import get_ai, audio_to_text, text_to_audio
-from .forms import UploadFile
+from .forms import UploadFileForm
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 def jarvis_assist(request):
     if request.method == "POST":
         # FormFile instance // request.POST and request.FILES is required.
-        form = UploadFile(request.POST, request.FILES)
+        form = UploadFileForm(request.POST, request.FILES)
 
         # Form Validate
         if form.is_valid():
@@ -19,7 +19,7 @@ def jarvis_assist(request):
             get_text = audio_to_text(audio_file)
             ai_response = get_ai(get_text)
 
-            return text_to_audio(ai_response)
+            return JsonResponse(ai_response)
 
             # response
             # return JsonResponse({
