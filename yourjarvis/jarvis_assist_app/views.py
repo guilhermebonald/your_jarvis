@@ -1,7 +1,16 @@
 from django.http import JsonResponse, FileResponse
-from .service import get_ai, audio_to_text, Text_To_Audio_Manage
+from .text_processing import Text_To_Audio_Manage
+from .ai_api import AIClient
+from .audio_processing import audio_to_text
 from .forms import UploadFileForm
 from django.views.decorators.csrf import csrf_exempt
+import os
+from dotenv import load_dotenv
+
+dir_path = os.path.dirname(os.path.abspath(__file__))
+path = os.path.join(dir_path, "static", ".env")
+
+load_dotenv(path)
 
 
 @csrf_exempt
@@ -18,7 +27,9 @@ def jarvis_assist(request):
 
             # Context
             get_text = audio_to_text(audio_file)
-            ai_response = get_ai(get_text)
+            ai_response = AIClient(api_key=os.getenv("YOU_API_KEY")).get_ai_response(
+                get_text
+            )
 
             # Text To Audio Manage
             text_to_audio_manage.text_to_audio(get_text)
