@@ -18,7 +18,6 @@ def jarvis_assist(request):
     if request.method == "POST":
         # FormFile instance // request.POST and request.FILES is required.
         form = UploadFileForm(request.POST, request.FILES)
-        text_to_audio_manage = Text_To_Audio_Manage()
 
         # Form Validate
         if form.is_valid():
@@ -26,14 +25,14 @@ def jarvis_assist(request):
             audio_file = form.cleaned_data["file"]
 
             # Context
-            get_text = audio_to_text(audio_file)
+            text_response = audio_to_text(audio_file)
             ai_response = AIClient(api_key=os.getenv("YOU_API_KEY")).get_ai_response(
-                get_text
+                text_response
             )
 
-            # Text To Audio Manage
-            text_to_audio_manage.text_to_audio(get_text)
-            file_name = text_to_audio_manage.get_file_name()
+            # Converting text to audio and generate file.
+            Text_To_Audio_Manage().text_to_audio(text_response)
+            file_name = Text_To_Audio_Manage().get_file_name()
 
             return FileResponse(open(file_name, "rb"))
 
