@@ -8,9 +8,11 @@ import os
 from dotenv import load_dotenv
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
-path = os.path.join(dir_path, "static", ".env")
+static_path = os.path.join(dir_path, "static", ".env")
 
-load_dotenv(path)
+temp_path = os.path.join(dir_path, "temp")
+
+load_dotenv(static_path)
 
 
 @csrf_exempt
@@ -21,6 +23,12 @@ def jarvis_assist(request):
 
         # Form Validate
         if form.is_valid():
+
+            # Cleaning old .mp3 files
+            for trash in os.listdir(temp_path):
+                if ".mp3" in trash:
+                    os.remove(temp_path + f"\\{trash}")
+
             # Get File from Form after validation pass.
             audio_file = form.cleaned_data["file"]
 
@@ -31,8 +39,9 @@ def jarvis_assist(request):
             )
 
             # Converting text to audio and generate file.
-            Text_To_Audio_Manage().text_to_audio(text_response)
-            file_name = Text_To_Audio_Manage().get_file_name()
+            tta = Text_To_Audio_Manage()
+            tta.text_to_audio(text_response)
+            file_name = tta.get_file_name()
 
             return FileResponse(open(file_name, "rb"))
 
