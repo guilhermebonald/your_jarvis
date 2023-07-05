@@ -22,12 +22,7 @@ class Text_To_Audio_Manage:
     def get_file_name(self):
         file_name = self.temp_file_name + ".mp3"
         return file_name
-    
-    def remove_temp_file(self):
-        try:
-            os.remove(self.temp_file_name + ".mp3")
-        except OSError as e:
-            print("Erro ao remover o arquivo temporário: " + str(e))
+
 
 # tta = Text_To_Audio_Manage()
 # tta.text_to_audio("Olá, Boa noite!")

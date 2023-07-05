@@ -40,7 +40,7 @@ def jarvis_assist(request):
 
             # Converting text to audio and generate file.
             tta = Text_To_Audio_Manage()
-            tta.text_to_audio(text_response)
+            tta.text_to_audio(ai_response)
             file_name = tta.get_file_name()
 
             return FileResponse(open(file_name, "rb"))
