@@ -9,7 +9,7 @@ def audio_to_text(file):
         audio = r.record(source)
 
     try:
-        message = r.recognize_google(audio, language="pt-BR")
+        message = r.recognize_whisper(audio, language="portuguese")
         return message
     except sr.RequestError as e:
         return json.dumps({"file error": e})
