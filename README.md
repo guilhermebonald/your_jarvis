@@ -22,6 +22,8 @@ A API YourJarvis cria uma interação por áudio com uma inteligência artificia
 | :--------- | :------------------------------------------ |
 | `file` |  Arquivo de aúdio (**.mp3**). |
 
+
+
 ## Uso/Exemplos
 
 ```python
@@ -38,3 +40,9 @@ with open("File.mp3", "wb") as file:
 
 os.system("File.mp3")
 ```
+
+
+## Roadmap
+
+- Adicionar interação com tarefas.
+
