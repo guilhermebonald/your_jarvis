@@ -1,7 +1,7 @@
 
 # YourJarvis
 
-YourJarvis é uma API cria uma interação por áudio com uma inteligência artificial. Envie comandos de voz para obter respostas da mesma forma, proporcionando uma comunicação prática.
+YourJarvis é uma API cria uma interação por áudio com ChatGPT. Envie comandos de voz para obter respostas da mesma forma, proporcionando uma comunicação prática.
 
 
 ## Documentação da API
