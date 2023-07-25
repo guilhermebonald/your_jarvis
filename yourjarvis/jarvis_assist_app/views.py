@@ -6,6 +6,7 @@ from .forms import UploadFileForm
 from django.views.decorators.csrf import csrf_exempt
 import os
 from dotenv import load_dotenv
+import requests
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 static_path = os.path.join(dir_path, "static", ".env")
@@ -23,7 +24,6 @@ def jarvis_assist(request):
 
         # Form Validate
         if form.is_valid():
-
             # Cleaning old .mp3 files
             for trash in os.listdir(temp_path):
                 if ".mp3" in trash:
@@ -34,9 +34,9 @@ def jarvis_assist(request):
 
             # Context
             text_response = audio_to_text(audio_file)
-            ai_response = AIClient(api_key=os.getenv("YOU_API_KEY")).get_ai_response(
-                text_response
-            )
+            ai_response = AIClient(
+                api_key=os.getenv("YOU_API_KEY"), requests=requests
+            ).get_ai_response(text_response)
 
             # Converting text to audio and generate file.
             tta = Text_To_Audio_Manage()

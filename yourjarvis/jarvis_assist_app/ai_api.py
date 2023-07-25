@@ -1,21 +1,20 @@
-import requests
-
 # * Get AI Response from API.
 class AIClient:
-    def __init__(self, api_key):
+    def __init__(self, api_key, requests):
         self.api_key = api_key
+        self.requests = requests
 
     def get_ai_response(self, message):
         url = f"https://api.betterapi.net/youchat?inputs={message}. Responda em portugues&key={self.api_key}"
 
-        response = requests.get(url)
+        response = self.requests.get(url)
         if response.status_code == 200:
             json = response.json()
             return json["generated_text"]
         else:
             return {"Falha na requisição": response.status_code}
 
-print(AIClient("INKDZOVRYIHBXE0WLSQW0OVT3JCQYAFXBAV").get_ai_response("Ola, boa tarde"))
 
+# print(AIClient("INKDZOVRYIHBXE0WLSQW0OVT3JCQYAFXBAV").get_ai_response("Ola, boa tarde"))
 
 # ! API fora do ar. Precisa ser alterada!

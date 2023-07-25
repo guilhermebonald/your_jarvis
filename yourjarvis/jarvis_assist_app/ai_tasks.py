@@ -1,19 +1,18 @@
 from spacy import load
 from spacy.matcher import Matcher
 
-nlp = load("pt_core_news_lg")
-
-
 class DoTask:
     def __init__(self):
         self.intentions = []
+        self.lemma = []
+        self.nlp = load("pt_core_news_lg")
 
     def get_intention(self, intention=str, patterns=list) -> list:
-        matcher = Matcher(nlp.vocab)
+        matcher = Matcher(self.nlp.vocab)
 
         matcher.add("DEFAULT_A", [patterns])
 
-        doc = nlp("{}".format(intention))
+        doc = self.nlp("{}".format(intention))
 
         matches = matcher(doc)
 
@@ -23,11 +22,25 @@ class DoTask:
 
         return self.intentions
 
-    def create_reminder(self):
-        intention = self.get_intention()
-        for i in intention:
-            print(i)
+  
+    def get_lemma(self) -> list:
+        intention = []
+        
+        for i in self.intentions:
+            intention.append(i)
 
+        for l in intention:
+            doc = self.nlp(l)
+            for d in doc:
+                self.lemma.append(d.lemma_)
+        
+        return self.lemma
+    
+    
+    def do_reminder(self):
+        for l in self.lemma:
+            if "criar" and "lembrete" in l:
+                print("Lembrete Criado!")
 
 
 # ONLY FOR EXECUTE TESTS
@@ -40,4 +53,6 @@ my_pattern = [
 
 
 task = DoTask()
-print(task.get_intention("Crie um lembrete para mim", my_pattern))
+task.get_intention("crie um lembrete para mim", my_pattern)
+task.get_lemma()
+task.do_reminder()
