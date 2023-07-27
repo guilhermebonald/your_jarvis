@@ -1,7 +1,8 @@
 from spacy import load
 from spacy.matcher import Matcher
 
-class DoTask:
+
+class LanguageProcessing:
     def __init__(self):
         self.intentions = []
         self.lemma = []
@@ -22,10 +23,9 @@ class DoTask:
 
         return self.intentions
 
-  
     def get_lemma(self) -> list:
         intention = []
-        
+
         for i in self.intentions:
             intention.append(i)
 
@@ -33,14 +33,8 @@ class DoTask:
             doc = self.nlp(l)
             for d in doc:
                 self.lemma.append(d.lemma_)
-        
+
         return self.lemma
-    
-    
-    def do_reminder(self):
-        for l in self.lemma:
-            if "criar" and "lembrete" in l:
-                print("Lembrete Criado!")
 
 
 # ONLY FOR EXECUTE TESTS
@@ -52,7 +46,6 @@ my_pattern = [
 ]
 
 
-task = DoTask()
+task = LanguageProcessing()
 task.get_intention("crie um lembrete para mim", my_pattern)
 task.get_lemma()
-task.do_reminder()

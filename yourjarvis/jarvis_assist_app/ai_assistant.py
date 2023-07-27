@@ -15,6 +15,7 @@ class AIClient:
             return {"Falha na requisição": response.status_code}
 
 
+
 # print(AIClient("INKDZOVRYIHBXE0WLSQW0OVT3JCQYAFXBAV").get_ai_response("Ola, boa tarde"))
 
 # ! API fora do ar. Precisa ser alterada!

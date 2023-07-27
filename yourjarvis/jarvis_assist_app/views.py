@@ -1,6 +1,6 @@
 from django.http import JsonResponse, FileResponse
 from .text_processing import Text_To_Audio_Manage
-from .ai_api import AIClient
+from .ai_assistant import AIClient
 from .audio_processing import audio_to_text
 from .forms import UploadFileForm
 from django.views.decorators.csrf import csrf_exempt
