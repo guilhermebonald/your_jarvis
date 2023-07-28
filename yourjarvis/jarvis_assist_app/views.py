@@ -1,7 +1,7 @@
 from django.http import JsonResponse, FileResponse
-from .text_processing import Text_To_Audio_Manage
-from .ai_assistant import AIClient
-from .audio_processing import audio_to_text
+from .modules.text_processing import Text_To_Audio_Manage
+from .modules.ai_assistant import AIAssistant
+from .modules.audio_processing import audio_to_text
 from .forms import UploadFileForm
 from django.views.decorators.csrf import csrf_exempt
 import os
@@ -34,7 +34,7 @@ def jarvis_assist(request):
 
             # Context
             text_response = audio_to_text(audio_file)
-            ai_response = AIClient(
+            ai_response = AIAssistant(
                 api_key=os.getenv("YOU_API_KEY"), requests=requests
             ).get_ai_response(text_response)
 

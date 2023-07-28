@@ -1,5 +1,5 @@
 # * Get AI Response from API.
-class AIClient:
+class AIAssistant:
     def __init__(self, api_key, requests):
         self.api_key = api_key
         self.requests = requests
@@ -13,7 +13,6 @@ class AIClient:
             return json["generated_text"]
         else:
             return {"Falha na requisição": response.status_code}
-
 
 
 # print(AIClient("INKDZOVRYIHBXE0WLSQW0OVT3JCQYAFXBAV").get_ai_response("Ola, boa tarde"))
