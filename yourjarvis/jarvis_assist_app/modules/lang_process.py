@@ -35,28 +35,3 @@ class Lemmatizer:
                 self.lemma.append(token.lemma_)
 
         return self.lemma
-
-
-# class DoTask(LanguageProcessing):
-#     def do_task(self, intention=str, pattern=list):
-#         self.get_intention(intention=intention, patterns=pattern)
-#         lemma = self.get_lemma()
-
-#         for i in lemma:
-#             if "criar" and "lembrete" in i:
-#                 print("Criando Lembrete!")
-
-
-# ? ONLY FOR EXECUTE TESTS
-
-my_pattern = [
-    {"POS": "VERB"},
-    {"OP": "?"},
-    {"POS": "NOUN"},
-]
-
-intent_process = IntentProcessing()
-intentions = intent_process.process_intention("Criar lembrete", my_pattern)
-
-lemma = Lemmatizer()
-print(lemma.get_lemma(intentions=intentions))
