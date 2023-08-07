@@ -4,18 +4,21 @@ from lang_process import IntentProcessing, Lemmatizer
 
 class DoTask(ABC):
     @abstractmethod
-    def execute(self) -> None:
+    def execute(self, lemma=list) -> None:
         pass        
      
 
 class CreateReminder(DoTask):
-    def __init__(self, lemma=list) -> None:
-        self.lemma = lemma
-
-    def execute(self) -> None:
-        for i in self.lemma:
+    def execute(self, lemma) -> None:
+        for i in lemma:
             if "criar" and "lembrete" in i:
                 print("Lembrete criado!")
+
+class CreateNote(DoTask):
+    def execute(self, lemma=list) -> None:
+        for i in lemma:
+            if "criar" and "nota" in i:
+                print("Nota Criada!")
 
 
 
@@ -28,10 +31,10 @@ my_pattern = [
 ]
 
 intent_process = IntentProcessing()
-intentions = intent_process.process_intention("Criar lembrete", my_pattern)
+intentions = intent_process.process_intention("Criar notas", my_pattern)
 
 lemma_process = Lemmatizer()
 lemma = lemma_process.get_lemma(intentions)
 
-create_r = CreateReminder(lemma=lemma)
-create_r.execute()
+create_n = CreateNote()
+create_n.execute(lemma=lemma)
