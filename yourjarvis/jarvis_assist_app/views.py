@@ -1,12 +1,13 @@
 from django.http import JsonResponse, FileResponse
 from .modules.text_processing import Text_To_Audio_Manage
-from .modules.ai_assistant import AIAssistant, HttpClient
 from .modules.audio_processing import audio_to_text
 from .forms import UploadFileForm
 from django.views.decorators.csrf import csrf_exempt
 import os
 from dotenv import load_dotenv
-import requests
+from httpx import Client
+from .modules.ai.modules.request import DoRequest as req
+from .modules.ai.ai import PoeAiGen
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 static_path = os.path.join(dir_path, "static", ".env")
@@ -14,6 +15,7 @@ static_path = os.path.join(dir_path, "static", ".env")
 temp_path = os.path.join(dir_path, "temp")
 
 load_dotenv(static_path)
+poeKey = os.getenv("POE-KEY")
 
 
 @csrf_exempt
@@ -32,11 +34,13 @@ def jarvis_assist(request):
             # Get File from Form after validation pass.
             audio_file = form.cleaned_data["file"]
 
-            # Context
+            # Convert user audio to text
             text_response = audio_to_text(audio_file)
-            ai_response = AIAssistant(
-                api_key=os.getenv("YOU_API_KEY"), request_method=HttpClient()
-            ).get_ai_response(text_response)
+
+            # Send message for AI and get response
+            poeAi = PoeAiGen(request=req, client=Client, key_cookie=poeKey)
+            poeAi.send_msg(bot="chinchilla", message=text_response)
+            ai_response = poeAi.get_last_msg()
 
             # Converting text to audio and generate file.
             tta = Text_To_Audio_Manage()
