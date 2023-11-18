@@ -1,6 +1,7 @@
 import speech_recognition as sr
 import json
 
+
 # * Get Audio and convert to Text.
 def audio_to_text(file):
     r = sr.Recognizer()

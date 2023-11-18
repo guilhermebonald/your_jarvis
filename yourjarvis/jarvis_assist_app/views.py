@@ -29,7 +29,7 @@ def jarvis_assist(request):
             # Cleaning old .mp3 files
             for trash in os.listdir(temp_path):
                 if ".mp3" in trash:
-                    os.remove(temp_path + f"\\{trash}")
+                    os.remove(temp_path + f"/{trash}")
 
             # Get File from Form after validation pass.
             audio_file = form.cleaned_data["file"]
