@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 import os
 from dotenv import load_dotenv
 from httpx import Client
-from .modules.ai.modules.request import DoRequest as req
+from .modules.ai.request import DoRequest as req
 from .modules.ai.ai import PoeAiGen
 
 dir_path = os.path.dirname(os.path.abspath(__file__))

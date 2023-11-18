@@ -1,5 +1,5 @@
 import time
-import modules.queries as queries
+from . import queries
 from abc import ABC, abstractmethod
 
 
